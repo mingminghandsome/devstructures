@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wish.mm.dao.sg.mapper.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.wish.mm.dao.sg.entity.Member">
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="member_cellphone" jdbcType="CHAR" property="memberCellphone" />
+    <result column="member_password" jdbcType="CHAR" property="memberPassword" />
+    <result column="member_nickname" jdbcType="CHAR" property="memberNickname" />
+    <result column="member_coinaddress" jdbcType="CHAR" property="memberCoinaddress" />
+    <result column="member_date" jdbcType="INTEGER" property="memberDate" />
+    <result column="member_status" jdbcType="CHAR" property="memberStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    member_id, member_cellphone, member_password, member_nickname, member_coinaddress, 
+    member_date, member_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sg_member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sg_member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wish.mm.dao.sg.entity.Member">
+    insert into sg_member (member_id, member_cellphone, member_password, 
+      member_nickname, member_coinaddress, member_date, 
+      member_status)
+    values (#{memberId,jdbcType=INTEGER}, #{memberCellphone,jdbcType=CHAR}, #{memberPassword,jdbcType=CHAR}, 
+      #{memberNickname,jdbcType=CHAR}, #{memberCoinaddress,jdbcType=CHAR}, #{memberDate,jdbcType=INTEGER}, 
+      #{memberStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wish.mm.dao.sg.entity.Member">
+    insert into sg_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberCellphone != null">
+        member_cellphone,
+      </if>
+      <if test="memberPassword != null">
+        member_password,
+      </if>
+      <if test="memberNickname != null">
+        member_nickname,
+      </if>
+      <if test="memberCoinaddress != null">
+        member_coinaddress,
+      </if>
+      <if test="memberDate != null">
+        member_date,
+      </if>
+      <if test="memberStatus != null">
+        member_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberCellphone != null">
+        #{memberCellphone,jdbcType=CHAR},
+      </if>
+      <if test="memberPassword != null">
+        #{memberPassword,jdbcType=CHAR},
+      </if>
+      <if test="memberNickname != null">
+        #{memberNickname,jdbcType=CHAR},
+      </if>
+      <if test="memberCoinaddress != null">
+        #{memberCoinaddress,jdbcType=CHAR},
+      </if>
+      <if test="memberDate != null">
+        #{memberDate,jdbcType=INTEGER},
+      </if>
+      <if test="memberStatus != null">
+        #{memberStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wish.mm.dao.sg.entity.Member">
+    update sg_member
+    <set>
+      <if test="memberCellphone != null">
+        member_cellphone = #{memberCellphone,jdbcType=CHAR},
+      </if>
+      <if test="memberPassword != null">
+        member_password = #{memberPassword,jdbcType=CHAR},
+      </if>
+      <if test="memberNickname != null">
+        member_nickname = #{memberNickname,jdbcType=CHAR},
+      </if>
+      <if test="memberCoinaddress != null">
+        member_coinaddress = #{memberCoinaddress,jdbcType=CHAR},
+      </if>
+      <if test="memberDate != null">
+        member_date = #{memberDate,jdbcType=INTEGER},
+      </if>
+      <if test="memberStatus != null">
+        member_status = #{memberStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wish.mm.dao.sg.entity.Member">
+    update sg_member
+    set member_cellphone = #{memberCellphone,jdbcType=CHAR},
+      member_password = #{memberPassword,jdbcType=CHAR},
+      member_nickname = #{memberNickname,jdbcType=CHAR},
+      member_coinaddress = #{memberCoinaddress,jdbcType=CHAR},
+      member_date = #{memberDate,jdbcType=INTEGER},
+      member_status = #{memberStatus,jdbcType=CHAR}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+</mapper>

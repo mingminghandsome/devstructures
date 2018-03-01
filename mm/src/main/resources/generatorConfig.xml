@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry
+            location="D:\MavenRepository\repository\mysql\mysql-connector-java\5.1.45\mysql-connector-java-5.1.45.jar"/>
+    <context id="context" targetRuntime="MyBatis3">
+        <!--去除注释  -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- <javaTypeResolver >
+             <property name="forceBigDecimals" value="false" />
+         </javaTypeResolver>-->
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3307/link_sg?useUnicode=true&amp;characterEncoding=UTF-8"
+                        userId="root" password="root"/>
+        <!--1生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径,如/src/main/java-->
+        <javaModelGenerator targetPackage="com.wish.mm.dao.sg.entity" targetProject="mm/src/main/java">
+            <property name="trimStrings" value="true"/>
+            <!-- 从数据库返回的值被清理前后的空格  -->
+            <property name="enableSubPackages" value="false"/>
+        </javaModelGenerator>
+        <!--2对应的mapper.xml文件  -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="mm/src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--3对应的Mapper接口类文件 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wish.mm.dao.sg.mapper"
+                             targetProject="mm/src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <!--<property name="rootInterface" value="BaseMapper"/>-->
+        </javaClientGenerator>
+
+        <table tableName="sg_member" domainObjectName="Member"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+       
+    </context>
+</generatorConfiguration>
